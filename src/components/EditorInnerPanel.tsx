@@ -5,6 +5,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
 import { TextEditor } from "./TextEditor";
+import { EditorOutput } from "./EditorOutput";
 
 function EditorInnerPanel() {
   return (
@@ -17,9 +18,7 @@ function EditorInnerPanel() {
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={50} minSize={35}>
-        <div className="flex h-[200px] items-center justify-center p-6">
-          <span className="font-semibold">One</span>
-        </div>
+        <EditorOutput />
       </ResizablePanel>
     </ResizablePanelGroup>
   );

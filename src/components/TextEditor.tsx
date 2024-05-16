@@ -9,7 +9,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({}) => {
   const { theme, setTheme } = useTheme();
   return (
     <Editor
-      height="90vh"
+      height="100vh"
       defaultLanguage="javascript"
       defaultValue="// some comment"
       theme={theme === "dark" ? "vs-dark" : "vs-light"}
