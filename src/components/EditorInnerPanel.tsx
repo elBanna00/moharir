@@ -4,7 +4,7 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { TextEditor } from "./TextEditor";
+import TextEditor from "./TextEditor";
 import { EditorOutput } from "./EditorOutput";
 
 function EditorInnerPanel() {
