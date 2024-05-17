@@ -2,7 +2,7 @@ import Editor, { useMonaco } from "@monaco-editor/react";
 import { useTheme } from "next-themes";
 import * as monaco from "monaco-editor";
 import { initVimMode } from "monaco-vim";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 interface TextEditorProps {}
 
@@ -13,6 +13,8 @@ export const TextEditor: React.FC<TextEditorProps> = ({}) => {
   const monaco = useMonaco();
   const { theme } = useTheme();
 
+  const [sourceCode, setSourceCode] = useState("");
+  console.log(sourceCode);
   const handleEditorDidMount = (
     editor: monaco.editor.IStandaloneCodeEditor | null,
     monaco: any
@@ -24,7 +26,9 @@ export const TextEditor: React.FC<TextEditorProps> = ({}) => {
       initVimMode(editor, statusBarRef.current);
     }
   };
-
+  const handleOnChange = (value: string | undefined) => {
+    setSourceCode(value!);
+  };
   return (
     <div
       style={{
@@ -40,6 +44,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({}) => {
         language="javascript"
         onMount={handleEditorDidMount}
         defaultValue="// vim mode enabled"
+        onChange={handleOnChange}
       />
       <span
         ref={statusBarRef}
