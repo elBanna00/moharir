@@ -12,12 +12,13 @@ export const TextEditor: React.FC<TextEditorProps> = ({}) => {
   const vimModeRef = useRef(null);
   const monaco = useMonaco();
   const { theme } = useTheme();
+
   const handleEditorDidMount = (
     editor: monaco.editor.IStandaloneCodeEditor | null,
     monaco: any
   ) => {
     editorRef.current = editor;
-
+    editor?.focus();
     // Initialize Vim mode
     if (monaco) {
       initVimMode(editor, statusBarRef.current);
