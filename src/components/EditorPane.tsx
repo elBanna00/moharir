@@ -1,11 +1,27 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { ModeToggle } from "./modeToggle";
 import LanguagesSelect from "./LanguagesSelect";
 import EditorInnerPanel from "./EditorInnerPanel";
+import {
+  LanguangeOption,
+  LanguangeOpts,
+  exampleSnippets,
+} from "@/config/config";
 
 interface editorPaneProps {}
 
 const EditorPane: React.FC<editorPaneProps> = ({}) => {
+  const [languageOption, setLanguageOption] = useState(LanguangeOpts[1]);
+  const [sourceCode, setSourceCode] = useState(
+    `//Vim mode enabled\n ${exampleSnippets[languageOption.language]}`
+  );
+  const onSelect = (value: LanguangeOption) => {
+    setLanguageOption(value);
+    setSourceCode(`//Vim mode enabled\n ${exampleSnippets[value.language]}`);
+  };
+  console.log(languageOption);
+  console.log(sourceCode);
   return (
     <div className="min-h-screen dark:bg-black bg-slate-300 rounded-2xl shadow-2xl py-6 px-8">
       <div className="flex items-center justify-between pb-3">
@@ -15,12 +31,19 @@ const EditorPane: React.FC<editorPaneProps> = ({}) => {
         <div className="flex items-center space-x-2 ">
           <ModeToggle />
           <div className="w-[230px]">
-            <LanguagesSelect />
+            <LanguagesSelect
+              onSelect={onSelect}
+              selectedOption={languageOption}
+            />
           </div>
         </div>
       </div>
       <div className=" bg-slate-300 dark:bg-gray-900 p-3 rounded-xl">
-        <EditorInnerPanel />
+        <EditorInnerPanel
+          sourceCode={sourceCode}
+          setSourceCode={setSourceCode}
+          selectedLanguage={languageOption}
+        />
       </div>
     </div>
   );

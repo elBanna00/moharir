@@ -1,20 +1,28 @@
 import Editor, { useMonaco } from "@monaco-editor/react";
 import { useTheme } from "next-themes";
 import * as monaco from "monaco-editor";
+// @ts-ignore
 import { initVimMode } from "monaco-vim";
 import React, { useRef, useState } from "react";
+import { LanguangeOption, exampleSnippets } from "@/config/config";
 
-interface TextEditorProps {}
+interface TextEditorProps {
+  setSourceCode: React.Dispatch<React.SetStateAction<string>>;
+  selectedLanguage: LanguangeOption;
+  sourceCode: string;
+}
 
-export const TextEditor: React.FC<TextEditorProps> = ({}) => {
+export const TextEditor: React.FC<TextEditorProps> = ({
+  setSourceCode,
+  selectedLanguage,
+  sourceCode,
+}) => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   const statusBarRef = useRef<HTMLDivElement | null>(null);
   const vimModeRef = useRef(null);
   const monaco = useMonaco();
   const { theme } = useTheme();
-
-  const [sourceCode, setSourceCode] = useState("");
-  console.log(sourceCode);
+  const selectedLanguagestr = String(selectedLanguage.language);
   const handleEditorDidMount = (
     editor: monaco.editor.IStandaloneCodeEditor | null,
     monaco: any
@@ -41,10 +49,11 @@ export const TextEditor: React.FC<TextEditorProps> = ({}) => {
       <Editor
         height="100vh"
         theme={theme === "dark" ? "vs-dark" : "vs-light"}
-        language="javascript"
+        language={selectedLanguage.language}
         onMount={handleEditorDidMount}
-        defaultValue="// vim mode enabled"
+        defaultValue={sourceCode}
         onChange={handleOnChange}
+        value={sourceCode}
       />
       <span
         ref={statusBarRef}

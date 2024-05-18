@@ -1,4 +1,10 @@
-export const LanguangeOpts = [
+export interface LanguangeOption {
+  language: string;
+  version: string;
+  aliases: string[];
+  runtime?: string;
+}
+export const LanguangeOpts: LanguangeOption[] = [
   {
     language: "typescript",
     version: "1.32.3",
