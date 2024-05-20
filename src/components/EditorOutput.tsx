@@ -11,12 +11,12 @@ interface EditorOutputProps {
 
 export const EditorOutput: React.FC<EditorOutputProps> = ({ opt, src }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [codeOutput, setCodeOutput] = useState("");
+  const [codeOutput, setCodeOutput] = useState([]);
   const handleOnClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setIsLoading(true);
     const result = await executeCode(opt, src, setIsLoading);
-    setCodeOutput(result.run.output);
+    setCodeOutput(result.run.output.split("\n"));
   };
   return (
     <div className="space-y-3 bg-slate-300 dark:bg-black min-h-screen">
@@ -44,7 +44,13 @@ export const EditorOutput: React.FC<EditorOutputProps> = ({ opt, src }) => {
         )}
       </div>
       <div className="px-6">
-        <h2>{codeOutput}</h2>
+        {codeOutput.map((res) => {
+          return (
+            <p key={res} className="text-sm">
+              {res}
+            </p>
+          );
+        })}
       </div>
     </div>
   );
