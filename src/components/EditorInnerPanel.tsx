@@ -1,10 +1,13 @@
 "use client";
+import dynamic from "next/dynamic";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import TextEditor from "./TextEditor";
+const TextEditor = dynamic(() => import("@/components/TextEditor"), {
+  ssr: false,
+});
 import { EditorOutput } from "./EditorOutput";
 import { LanguangeOption } from "@/config/config";
 

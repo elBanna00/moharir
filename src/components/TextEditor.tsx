@@ -23,6 +23,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
   const monaco = useMonaco();
   const { theme } = useTheme();
   const selectedLanguagestr = String(selectedLanguage.language);
+
   const handleEditorDidMount = (
     editor: monaco.editor.IStandaloneCodeEditor | null,
     monaco: any
@@ -34,6 +35,7 @@ export const TextEditor: React.FC<TextEditorProps> = ({
       initVimMode(editor, statusBarRef.current);
     }
   };
+
   const handleOnChange = (value: string | undefined) => {
     setSourceCode(value!);
   };
