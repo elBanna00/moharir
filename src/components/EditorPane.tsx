@@ -8,7 +8,9 @@ import {
   LanguangeOpts,
   exampleSnippets,
 } from "@/config/config";
-
+export interface CodeSnippetsProps {
+  [key: string]: string;
+}
 interface editorPaneProps {}
 
 const EditorPane: React.FC<editorPaneProps> = ({}) => {

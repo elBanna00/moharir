@@ -1,3 +1,4 @@
+import { CodeSnippetsProps } from "@/components/EditorPane";
 export interface LanguangeOption {
   language: string;
   version: string;
@@ -45,7 +46,7 @@ export const LanguangeOpts: LanguangeOption[] = [
   },
 ];
 
-export const exampleSnippets = {
+export const exampleSnippets: CodeSnippetsProps = {
   typescript: `
   function sum(a, b) {
     const result = a + b;
