@@ -1,21 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { Play } from "lucide-react";
+import { Loader, Play } from "lucide-react";
+import { LanguangeOption } from "@/config/config";
+import { executeCode } from "@/lib/api/executeCode";
 
-interface EditorOutputProps {}
+interface EditorOutputProps {
+  opt: LanguangeOption;
+  src: string;
+}
 
-export const EditorOutput: React.FC<EditorOutputProps> = ({}) => {
+export const EditorOutput: React.FC<EditorOutputProps> = ({ opt, src }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setIsLoading(true);
+    executeCode(opt, src, setIsLoading);
+  };
   return (
     <div className="space-y-3 bg-slate-300 dark:bg-black min-h-screen">
       <div className="flex items-center justify-between bg-slate-300 dark:bg-slate-900 px-6 py-2">
         <h2>Output</h2>
-        <Button
-          size={"sm"}
-          className="dark:bg-purple-600 dark:hover:bg-purple-800 text-slate-100 bg-slate-800 hover:bg-slate-900"
-        >
-          <Play className="w-4 h-4 mr-2" />
-          <span>Run</span>
-        </Button>
+        {isLoading ? (
+          <Button
+            disabled
+            onClick={handleOnClick}
+            size={"sm"}
+            className="dark:bg-purple-600 dark:hover:bg-purple-800 text-slate-100 bg-slate-800 hover:bg-slate-900"
+          >
+            <Loader className="w-4 h-4 mr-2 animate-spin" />
+            <span>Runing please wait...</span>
+          </Button>
+        ) : (
+          <Button
+            onClick={handleOnClick}
+            size={"sm"}
+            className="dark:bg-purple-600 dark:hover:bg-purple-800 text-slate-100 bg-slate-800 hover:bg-slate-900"
+          >
+            <Play className="w-4 h-4 mr-2" />
+            <span>Run</span>
+          </Button>
+        )}
       </div>
       <div className="px-6">
         <h2>Hello World</h2>

@@ -32,7 +32,7 @@ function EditorInnerPanel({
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={50} minSize={35}>
-        <EditorOutput />
+        <EditorOutput opt={selectedLanguage} src={sourceCode} />
       </ResizablePanel>
     </ResizablePanelGroup>
   );
