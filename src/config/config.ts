@@ -47,7 +47,7 @@ export const LanguangeOpts: LanguangeOption[] = [
 
 export const exampleSnippets = {
   typescript: `
-  function sum(a: number, b: number): number {
+  function sum(a, b) {
     const result = a + b;
     console.log("Sum is: " + result);
     return result;

@@ -22,6 +22,7 @@ export async function executeCode(
     const response = await axios.post(url, data);
     console.log("Response:", response);
     setload(false);
+
     return response.data;
   } catch (error) {
     console.error("Error executing code:", error);

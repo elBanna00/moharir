@@ -11,10 +11,12 @@ interface EditorOutputProps {
 
 export const EditorOutput: React.FC<EditorOutputProps> = ({ opt, src }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const handleOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const [codeOutput, setCodeOutput] = useState("");
+  const handleOnClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    executeCode(opt, src, setIsLoading);
+    const result = await executeCode(opt, src, setIsLoading);
+    setCodeOutput(result.run.output);
   };
   return (
     <div className="space-y-3 bg-slate-300 dark:bg-black min-h-screen">
@@ -42,7 +44,7 @@ export const EditorOutput: React.FC<EditorOutputProps> = ({ opt, src }) => {
         )}
       </div>
       <div className="px-6">
-        <h2>Hello World</h2>
+        <h2>{codeOutput}</h2>
       </div>
     </div>
   );
